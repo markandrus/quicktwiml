@@ -1,6 +1,6 @@
 var libxmljs = require('libxmljs'),
     fs = require('fs'),
-    xsd = libxmljs.parseXml(fs.readFileSync('TwiML.xsd').toString());
+    xsd = libxmljs.parseXml(fs.readFileSync('validate/TwiML.xsd').toString());
 
 module.exports = function validateTwiML(twiml) {
   var res = false;

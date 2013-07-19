@@ -18,4 +18,4 @@ TwiML.validatesUniquenessOf('key', { message: 'Key is not unique.' });
 
 module.exports = {
   TwiML: TwiML
-}
+};

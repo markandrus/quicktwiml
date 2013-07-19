@@ -1,7 +1,6 @@
-module.exports = function (app) {
+module.exports = function (app, TwiML) {
 
-var TwiML = require('../models.js').TwiML,
-    validate = require('../TwiML-validator.js');
+var validate = require('../validate/TwiML.js');
 
 app.post('/TwiML/:key?', function(req, res) {
   if (!validate(req.params.content)) {
