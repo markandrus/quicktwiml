@@ -2,6 +2,8 @@ var express = require('express'),
     app = express(),
     models = require('./models.js');
 
+app.enable('trust proxy');
+
 app.set('view engine', 'ejs');
 
 app.use(express.bodyParser());
