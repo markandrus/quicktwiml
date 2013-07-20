@@ -1,5 +1,3 @@
-'use strict';
-
 // Forget about jQuery!
 
 function removeClass(strs, str) {
@@ -60,3 +58,22 @@ var title = document.getElementById('title');
 title.onchange = function() {
   validateTwiML(textarea.textContent);
 };
+
+// Setup Twilio Client.
+
+var callBtn = document.getElementById('call');
+
+Twilio.Device.Setup(token);
+
+function call(key) {
+  return function() {
+    Twilio.Device.connect({
+      key: key
+    });
+  };
+}
+
+Twilio.Device.ready(function() {
+  callBtn.className = removeClass(callBtn.className, 'disabled');
+  callBtn.onclick = call(key);
+});
