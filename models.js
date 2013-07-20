@@ -8,7 +8,7 @@ function randKey(n) {
 
 var TwiML = schema.define('TwiML', {
   key: { type: String, length: 8, default: function() { return randKey(8); } },
-  title: { type: String, length: 255 },
+  title: { type: String, length: 255, default: function() { return "New TwiML Script"; } },
   content: { type: Schema.Text },
   date: { type: Date, default: function() { return new Data; } },
   timestamp: { type: Number, default: Date.now }
