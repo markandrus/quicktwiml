@@ -11,7 +11,6 @@ function handle(req, res) {
   res.end();
 }
 
-app.post('', handle);
 app.post('/', handle);
 
 };
