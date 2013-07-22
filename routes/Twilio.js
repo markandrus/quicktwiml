@@ -20,13 +20,14 @@ var twilio = require('twilio'),
 
 function handle(req, res) {
   if (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
-    var key = req.body.key, twiml = req.body.twiml;
+    var key = req.body.key,
+        twiml = req.body.twiml ? decodeURIComponent(req.body.twiml)
+                               : undefined;
     /* Redirect to TwiML. */
     if (key && !twiml)
       return res.redirect(302, '/TwiML/' + key);
     /* Echo TwiML. */
-    else if (!key && twiml &&
-        validate(decodeURIComponent(twiml))) {
+    else if (!key && twiml && validate(twiml)) {
       res.set('Content-Type', 'application/xml');
       res.send(200, twiml);
     /* Bad Request */
