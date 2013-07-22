@@ -97,9 +97,13 @@ function ready() {
 
 Twilio.Device.ready(ready);
 
-Twilio.Device.disconnect(function () {
+function disconnect() {
   removeClass(callBtn, 'btn-danger');
   addClass(callBtn, 'btn-success');
   callBtn.value = callBtn.value.replace(/Hangup$/, "Call");
   ready();
 });
+
+Twilio.Device.disconnect(disconnect);
+
+Twilio.Device.error(disconnect);
