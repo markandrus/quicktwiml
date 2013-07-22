@@ -1,8 +1,14 @@
-var Schema = require('jugglingdb').Schema,
-    schema = new Schema('postgres', {
-               database: process.env.DATABASE_URL || process.env.DATABASE_NAME
-             }),
-    crypto = require('crypto');
+var crypto = require('crypto'),
+    Schema = require('jugglingdb').Schema,
+    schema = new Schema('postgres', !process.env.APP_DB_HOST
+           /* Database for local development. */
+           ? { database: 'hello-world' }
+           /* Database for production. */
+           : { database: process.env.APP_DB_NAME,
+               username: process.env.APP_DB_USER,
+               host: process.env.APP_DB_HOST,
+               port: process.env.APP_DB_PORT,
+               password: process.env.APP_DB_PASS });
 
 /* Generate a random, URL-safe key. */
 function randKey(n) {
