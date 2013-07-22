@@ -20,7 +20,7 @@ var twilio = require('twilio'),
 
 function handle(req, res) {
   if (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
-    var key = req.body.key, twiml = req.body.key;
+    var key = req.body.key, twiml = req.body.twiml;
     /* Redirect to TwiML. */
     if (key && !twiml)
       return res.redirect(302, '/TwiML/' + key);
