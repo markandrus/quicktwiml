@@ -102,7 +102,7 @@ function disconnect() {
   addClass(callBtn, 'btn-success');
   callBtn.value = callBtn.value.replace(/Hangup$/, "Call");
   ready();
-});
+}
 
 Twilio.Device.disconnect(disconnect);
 
