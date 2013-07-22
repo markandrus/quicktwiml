@@ -1,18 +1,18 @@
-// Forget about jQuery!
+// Forget about jQuery
+// ===================
 
-function removeClass(strs, str) {
-  strs = strs || "";
-  return strs.split(' ').filter(function(s) {
+function removeClass(elm, str) {
+  return elm.className = elm.className.split(' ').filter(function(s) {
     return s !== str;
   }).join(' ');
 }
 
-function addClass(strs, str) {
-  strs = strs || "";
-  return removeClass(strs, str) + ' ' + str;
+function addClass(elm, str) {
+  return elm.className = removeClass(elm, str) + ' ' + str;
 }
 
-// Setup ACE.
+// Setup ACE
+// =========
 
 var editor = ace.edit('content-ace'),
     session = editor.getSession(),
@@ -26,7 +26,8 @@ session.on('change', function() {
   validateTwiML(text);
 });
 
-// Handle asynchronous calls to TwiML validation service.
+// Handle asynchronous calls to TwiML validation service
+// =====================================================
 
 var lastxmlhttp,
     saveBtn = document.getElementById('save');
@@ -41,17 +42,20 @@ function validateTwiML(twiml) {
       return;
     else if (xmlhttp.status === 200) {
       saveBtn.disabled = false;
-      saveBtn.className = removeClass(saveBtn.className, 'disabled');
+      removeClass(saveBtn, 'disabled');
     } else {
       saveBtn.disabled = true;
-      saveBtn.className = addClass(saveBtn.className, 'disabled');
+      addClass(saveBtn, 'disabled');
     }
   };
   xmlhttp.setRequestHeader('Content-Type', 'application/json');
   xmlhttp.send(JSON.stringify({ content: twiml }));
 }
 
-// Revalidate on title change.
+// Revalidate on title change
+// ==========================
+
+// TODO: Make more responsive.
 
 var title = document.getElementById('title');
 
@@ -59,24 +63,43 @@ title.onchange = function() {
   validateTwiML(textarea.textContent);
 };
 
-// Setup Twilio Client.
+// Setup Twilio Client
+// ===================
+
+// NOTE: There will either be global variable `key` or `twiml` accessible to
+// the following functions.
 
 var callBtn = document.getElementById('call');
 
 Twilio.Device.setup(token);
 
-function call(key) {
+function call(key, val) {
   return function() {
-    Twilio.Device.connect({
-      key: key
-    });
+    removeClass(callBtn, 'btn-success');
+    addClass(callBtn, 'btn-danger');
+    callBtn.value = callBtn.value.replace(/Call$/, "Hangup");
+    callBtn.onclick = Twilio.Device.disconnectAll;
+    var param = {}; param[key] = val;
+    Twilio.Device.connect(param);
   };
 }
 
-Twilio.Device.ready(function() {
-  if (key) {
-    callBtn.onclick = call(key);
-    callBtn.disabled = false;
-    callBtn.className = removeClass(callBtn.className, 'disabled');
-  }
+var twiml;
+
+function ready() {
+  if (key)
+    callBtn.onclick = call('key', key);
+  else if (twiml)
+    callBtn.onclick = call('twiml', twiml);
+  callBtn.disabled = false;
+  removeClass(callBtn, 'disabled');
+}
+
+Twilio.Device.ready(ready);
+
+Twilio.Device.disconnect(function () {
+  removeClass(callBtn, 'btn-danger');
+  addClass(callBtn, 'btn-success');
+  callBtn.value = callBtn.value.replace(/Hangup$/, "Call");
+  ready();
 });

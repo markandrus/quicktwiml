@@ -6,6 +6,13 @@ var twilio = require('twilio'),
 
 capability.allowClientOutgoing(process.env.TWILIO_APP_SID);
 
+// FIXME: This is problematic because the browser could cache `client.js'.
+
+// Response Codes:
+
+//   * 200
+//   * 500
+
 app.get('/client.js', function(req, res) {
   fs.readFile('public/client.js', function(err, file) {
     if (err) {
