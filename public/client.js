@@ -43,9 +43,15 @@ function validateTwiML(twiml) {
     else if (xmlhttp.status === 200) {
       saveBtn.disabled = false;
       removeClass(saveBtn, 'disabled');
+      callBtn.disabled = false;
+      removeClass(callBtn, 'disabled');
+      echo = twiml;
     } else {
       saveBtn.disabled = true;
       addClass(saveBtn, 'disabled');
+      callBtn.disabled = true;
+      addClass(callBtn, 'disabled');
+      echo = undefined;
     }
   };
   xmlhttp.setRequestHeader('Content-Type', 'application/json');
@@ -75,24 +81,25 @@ Twilio.Device.setup(token);
 
 function call(key, val) {
   return function() {
+    editor.setReadOnly(true);
     removeClass(callBtn, 'btn-success');
     addClass(callBtn, 'btn-danger');
     callBtn.value = callBtn.value.replace(/Call$/, "Hangup");
     callBtn.onclick = Twilio.Device.disconnectAll;
-    var param = {}; param[key] = val;
+    var param = {}; param[key] = encodeURIComponent(val());
     Twilio.Device.connect(param);
   };
 }
 
-var twiml;
+var echo;
 
 function ready() {
   if (key)
-    callBtn.onclick = call('key', key);
-  else if (twiml)
-    callBtn.onclick = call('twiml', twiml);
-  callBtn.disabled = false;
-  removeClass(callBtn, 'disabled');
+    callBtn.onclick = call('key', function() { return key; });
+  else
+    callBtn.onclick = call('twiml', function() { return echo; });
+  /*callBtn.disabled = false;
+  removeClass(callBtn, 'disabled');*/
 }
 
 Twilio.Device.ready(ready);

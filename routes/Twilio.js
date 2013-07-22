@@ -25,7 +25,8 @@ function handle(req, res) {
     if (key && !twiml)
       return res.redirect(302, '/TwiML/' + key);
     /* Echo TwiML. */
-    else if (!key && twiml && validate(twiml)) {
+    else if (!key && twiml &&
+        validate(decodeURIComponent(twiml))) {
       res.set('Content-Type', 'application/xml');
       res.send(200, twiml);
     /* Bad Request */
