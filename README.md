@@ -63,5 +63,5 @@ heroku config:set APP_DB_PORT=$APP_DB_PORT
 heroku config:set APP_DB_PASS=$APP_DB_PASS
 ```
 
-Finally, push this code (or your own fork) to your Heroku app. Questions? Open
+Finally, push this code (or your own fork) to your Heroku app! Questions? Open
 a GitHub issue and I'll try to help out.
