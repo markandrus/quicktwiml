@@ -9,7 +9,7 @@ Quickly save, share, and call
 
 * See [quicktwiml.herokuapp.com](https://quicktwiml.herokuapp.com) for a demo.
   Note that, unless I know you personally, I probably haven't shared the login
-  credentials with you.
+  credentials with you, so call functionality is disabled.
 
 The rest of this document explains how to deploy quicktwiml on Heroku.
 
