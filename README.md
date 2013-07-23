@@ -49,7 +49,7 @@ quicktwiml reads the information you recorded in the previous steps from
 environment variables. When deploying with Heroku, you can configure these like
 so:
 
-```shell
+```sh
 # Set the Twilio-specific environment variables.
 heroku config:set TWILIO_ACCOUNT_SID=$TWILIO_ACCOUNT_SID
 heroku config:set TWILIO_AUTH_TOKEN=$TWILIO_AUTH_TOKEN
