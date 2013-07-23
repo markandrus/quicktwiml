@@ -44,8 +44,11 @@ app.post('/TwiML/:key?', function(req, res) {
           else
             /* Update existing TwiML. */
             return update(req, res, function(res) {
-              res.send(200);
-              res.end();
+              res.set('Content-Type', 'text/html');
+              res.render('TwiML', {
+                twiml: twiml,
+                embed: req.query.embed ? true : false
+              });
             }, twiml);
           res.end();
         }
