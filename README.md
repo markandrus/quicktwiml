@@ -1,4 +1,4 @@
-quicktwiml <a href="http://www.twilio.com/" style="text: decoration: none; display: inline-block; width: 166px; height: 0; overflow: hidden; padding-top: 31px; background: url(http://www.twilio.com/packages/company/img/logos_icon_poweredbysmall.png) no-repeat;">powered by twilio™</a>
+quicktwiml
 ==========
 
 Quickly save, share, and call
