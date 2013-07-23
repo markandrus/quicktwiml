@@ -1,9 +1,15 @@
-quicktwiml
+quicktwiml <a href="http://www.twilio.com/" style="text: decoration: none; display: inline-block; width: 166px; height: 0; overflow: hidden; padding-top: 31px; background: url(http://www.twilio.com/packages/company/img/logos_icon_poweredbysmall.png) no-repeat;">powered by twilio™</a>
 ==========
 
-quicktwiml is a web app allowing you to quickly save, share, and call
-[TwiML](https://www.twilio.com/docs/api/twiml) scripts from your browser. See
-[quicktwiml.herokuapp.com](https://quicktwiml.herokuapp.com) for a demo.
+Quickly save, share, and call
+[TwiML](https://www.twilio.com/docs/api/twiml) scripts from your browser.
+
+* Shoutout to [Twimlbin](http://twimlbin.com/). I basically wanted to extend
+  your app to use [twilio.js](http://www.twilio.com/docs/client/twilio-js).
+
+* See [quicktwiml.herokuapp.com](https://quicktwiml.herokuapp.com) for a demo.
+  Note that, unless I know you personally, I probably haven't shared the login
+  credentials with you.
 
 The rest of this document explains how to deploy quicktwiml on Heroku.
 
