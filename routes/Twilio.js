@@ -33,9 +33,11 @@ function handle(req, res) {
     /* Bad Request */
     } else
       res.send(400);
-  /* Unauthorized. */
-  } else
+  /* Unauthorized (log request). */
+  } else {
+    console.log(req);
     res.send(401);
+  }
   res.end();
 }
 

@@ -32,6 +32,5 @@ var TwiML = schema.define('TwiML', {
 TwiML.validatesUniquenessOf('key', { message: 'Key is not unique.' });
 
 module.exports = {
-  _schema: schema,
   TwiML: TwiML
 };

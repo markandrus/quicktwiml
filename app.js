@@ -4,10 +4,17 @@ var express = require('express'),
 
 app.enable('trust proxy');
 
-app.set('view engine', 'ejs');
+app.use(function(req, res, next) {
+  if (!req.secure)
+    return res.redirect('https://' + req.get('Host') + req.url);
+  next();
+});
 
 app.use(express.bodyParser());
 
+app.set('view engine', 'ejs');
+
+require('./routes/token.js')(app, express.basicAuth);
 require('./routes/client-js.js')(app);
 require('./routes/validate.js')(app);
 require('./routes/TwiML.js')(app, models.TwiML);

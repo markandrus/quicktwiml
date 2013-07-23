@@ -1,6 +1,3 @@
-// Forget about jQuery
-// ===================
-
 function removeClass(elm, str) {
   return elm.className = elm.className.split(' ').filter(function(s) {
     return s !== str;
@@ -12,7 +9,7 @@ function addClass(elm, str) {
 }
 
 // Setup ACE
-// =========
+// ---------
 
 var editor = ace.edit('content-ace'),
     session = editor.getSession(),
@@ -27,7 +24,7 @@ session.on('change', function() {
 });
 
 // Handle asynchronous calls to TwiML validation service
-// =====================================================
+// -----------------------------------------------------
 
 var lastxmlhttp,
     saveBtn = document.getElementById('save');
@@ -43,8 +40,11 @@ function validateTwiML(twiml) {
     else if (xmlhttp.status === 200) {
       saveBtn.disabled = false;
       removeClass(saveBtn, 'disabled');
-      callBtn.disabled = false;
-      removeClass(callBtn, 'disabled');
+      // callBtn.disabled = false;
+      // removeClass(callBtn, 'disabled');
+      // FIXME: ...
+      callBtn.disabled = true;
+      addClass(callBtn, 'disabled');
       echo = twiml;
     } else {
       saveBtn.disabled = true;
@@ -59,7 +59,7 @@ function validateTwiML(twiml) {
 }
 
 // Revalidate on title change
-// ==========================
+// --------------------------
 
 // TODO: Make more responsive.
 
@@ -70,9 +70,9 @@ title.onchange = function() {
 };
 
 // Setup Twilio Client
-// ===================
+// -------------------
 
-// NOTE: There will either be global variable `key` or `twiml` accessible to
+// NOTE: There will either be global variable `key` or `echo` accessible to
 // the following functions.
 
 var callBtn = document.getElementById('call');
@@ -81,7 +81,6 @@ Twilio.Device.setup(token);
 
 function call(key, val) {
   return function() {
-    editor.setReadOnly(true);
     removeClass(callBtn, 'btn-success');
     addClass(callBtn, 'btn-danger');
     callBtn.value = callBtn.value.replace(/Call$/, "Hangup");
@@ -94,12 +93,11 @@ function call(key, val) {
 var echo;
 
 function ready() {
-  if (key)
-    callBtn.onclick = call('key', function() { return key; });
-  else
-    callBtn.onclick = call('twiml', function() { return echo; });
-  /*callBtn.disabled = false;
-  removeClass(callBtn, 'disabled');*/
+  if (!key)
+    return callBtn.onclick = call('twiml', function() { return echo; });
+  callBtn.onclick = call('key', function() { return key; });
+  callBtn.disabled = false;
+  removeClass(callBtn, 'disabled');
 }
 
 Twilio.Device.ready(ready);

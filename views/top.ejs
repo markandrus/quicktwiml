@@ -9,5 +9,11 @@
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="/style.css" rel="stylesheet">
+    <% if (embed) { %>
+      <style type="text/css">
+        body { padding: 0; !important; }
+        form { width: 100% !important; box-sizing: border-box; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+      </style>
+    <% } %>
   </head>
   <body>

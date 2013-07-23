@@ -8,9 +8,9 @@ function update(req, res, next, found) {
   twiml.title = req.body.title;
   twiml.content = req.body.content;
   twiml.save(function(err) {
-    console.log(err);
     if (!err)
       return next(res, twiml);
+    console.error(err);
     res.send(500);
     res.end();
   });
@@ -54,9 +54,10 @@ app.put('/TwiML/:key', function(req, res) {
   if (validate(req.body.content))
     return TwiML.findOne({ where: { key: req.params.key } },
       function(err, twiml) {
-        if (err)
+        if (err) {
+          console.error(err);
           res.send(500);
-        else if (!twiml)
+        } else if (!twiml)
           res.send(403);
         else
           return update(req, res, function(res) { 
@@ -81,13 +82,18 @@ app.put('/TwiML/:key', function(req, res) {
 
 app.del('/TwiML/:key', function(req, res) {
   TwiML.findOne({ where: { key: req.params.key } }, function(err, twiml) {
-    if (err)
+    if (err) {
+      console.error(err);
       res.send(500);
-    else if (!twiml)
+    } else if (!twiml)
       res.send(404);
     else
       return twiml.destroy(function(err) {
-        res.send(err ? 500 : 200);
+        if (err) {
+          console.error(err);
+          res.send(500);
+        } else
+          res.send(200);
         res.end();
       });
   });
@@ -108,10 +114,10 @@ app.del('/TwiML/:key', function(req, res) {
 app.get('/TwiML/:key?', function(req, res) {
   if (key = req.params.key)
     return TwiML.findOne({ where: { key: key } }, function(err, twiml) {
-      console.log(err);
-      if (err)
+      if (err) {
+        console.error(err);
         res.send(500);
-      else if (!twiml)
+      } else if (!twiml)
         res.send(404);
       /* Serve TwiML for Twilio. */
       else if
@@ -121,12 +127,26 @@ app.get('/TwiML/:key?', function(req, res) {
       /* Serve TwiML for a user. */
       } else {
         res.set('Content-Type', 'text/html');
-        return res.render('TwiML', { twiml: twiml });
+        return res.render('TwiML', {
+          twiml: twiml,
+          embed: req.query.embed ? true : false
+        });
       }
       res.end();
     });
   /* Serve TwiML index. */
-  res.render('TwiML', { twiml: {} });
+  var skip = parseInt(req.query.skip) || 0;
+  TwiML.all({ order: 'title', limit: 10, skip: skip * 10 }, function(err, twimls) {
+    if (!err)
+      return res.render('TwiML-index', {
+        twimls: twimls,
+        twiml: {},
+        embed: false
+      });
+    console.error(err);
+    res.send(500);
+    res.end();
+  });
 });
 
 };

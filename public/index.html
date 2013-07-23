@@ -1,18 +1,127 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<meta name="description" content="">
+<meta name="author" content="">
 <script src="//static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
-<script src="/client.js"></script>
-<!--
-<script src="/socket.io/socket.io.js"></script>
-<script>
-var socket = io.connect();
-socket.on('news', function(data) {
-  console.log(data);
-});
-</script>
--->
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
+<style type="text/css">
+iframe {
+  border: 0;
+  margin-bottom: 20px;
+}
+h2 {
+  font-weight: lighter;
+  opacity: 0.7;
+}
+#main {
+  background: -webkit-linear-gradient(#fff, #f0f0f0);
+}
+</style>
 </head>
 <body>
-<p>Oh, hai.</p>
+
+<!--<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>-->
+
+<!--<a href="/TwiML" class="btn btn-large btn-danger">Create a New TwiML script</a>-->
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12" style="float: none; margin: 0 auto;">
+      <h1>quicktwiml</h1>
+      <!--<h1>quicktwiml <a href="http://www.twilio.com/" style="text: decoration: none; display: inline-block; width: 166px; height: 0; overflow: hidden; padding-top: 31px; background: url(http://www.twilio.com/packages/company/img/logos_icon_poweredbysmall.png) no-repeat; position: relative; top: 1px;">powered by twilio™</a></h1>-->
+      <p class="lead">Quickly save, share, and call <a href="//www.twilio.com/docs/api/twiml">TwiML</a> scripts from your browser.</p>
+    </div>
+  </div>
+</div>
+
+<div id="main" class="container-fluid" style="border-bottom: 1px solid rgba(0,0,0,0.125);">
+  <div class="row-fluid">
+    <div class="span12" style="float: none; margin: 0 auto;">
+      <div class="row-fluid">
+        <div class="span8"> 
+          <h2>Try it out</h2>
+          <p>Click the &#8220;Call&#8221; button below to start calling the TwiML script from your browser.</p>
+          <iframe src="/TwiML/W81uCb5yTMs?embed=true" width="100%" height="345px"></iframe>
+        </div>
+        <div class="span4">
+          <h2>Get Started</h2>
+          <p>Create your own or test out some examples.</p>
+          <a href="/TwiML" class="btn btn-block btn-large btn-primary">Create a New TwiML Script</a>
+          <br>
+          <h2>Examples</h2>
+          <ul>
+            <li><a href="">Dial</a></li>
+            <li><a href="">Say</a></li>
+            <li><a href="">Redirect</a></li>
+          </ul>
+        </div>
+<!--          <div style="text-align: center; height: 345px; line-height: 345px;">
+          </div>
+        </div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="position: relative;">
+<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  <div class="row-fluid">
+    <div class="span12" style="float: none; margin: 0 auto;">
+      <h2>About</h2>
+      <p>This site is written in JavaScript using <a href="//nodejs.org/">Node.js</a> and is hosted on <a href="#">Heroku</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid">
+
+<div class="span12" style="float: none; margin: 0 auto;">
+
+<!--
+<h2>Examples</h2>
+
+<h3>Dial</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+  </div>
+  <div class="span6">
+    <iframe src="/TwiML/W81uCb5yTMs?embed=true" width="100%" height="345px"></iframe>
+  </div>
+</div>
+
+<h3>Redirect</h3>
+
+<div class="row-fluid">
+  <div class="span6">
+    <iframe src="/TwiML/W81uCb5yTMs?embed=true" width="100%" height="345px"></iframe>
+  </div>
+  <div class="span6">
+    <iframe src="/TwiML/hqkq_2KBFPY?embed=true&call=false" width="100%" height="345px"></iframe>
+  </div>
+</div>
+
+<h2>Embed</h2>
+<p>TwiML scripts can be embedded in your site using an iframe. Just set <code>src</code> to the URL for your TwiML and append the <code>?embed=true</code>. For example,
+<pre>
+&lt;iframe
+  src="https://quicktwiml.herokuapp.com/TwiML/N8ISto_t7oY?embed=true"
+  width="100%"
+  height="345px"
+&gt;&lt;/iframe&gt;
+</pre>
+<p>results in the following.</p>
+<iframe src="/TwiML/3ZeAnMf9-g8?embed=true" width="100%" height="345px"></iframe>
+<p>The embed method is pretty dumb for now (for example, it doesn't auto-adjust for height). If you'd like to help out, check out the project on <a href="#">GitHub</a>.</p>
+-->
+</div>
+</div>
+</div>
 </body>
 </html>
