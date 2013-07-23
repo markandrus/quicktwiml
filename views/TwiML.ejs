@@ -1,6 +1,6 @@
 <% include top %>
 <div>
-  <form id="twiml-form" action="/TwiML" method="POST" class="span6" style="margin-top: 5em; border: 1px solid rgba(0,0,0,0.125); border-radius: 4px; ">
+  <form id="twiml-form" action="/TwiML<% if (twiml.key) { %>/<%= twiml.key %><% } %>" method="POST" class="span6" style="margin-top: 5em; border: 1px solid rgba(0,0,0,0.125); border-radius: 4px; ">
     <% if (twiml.key) { %>
       <input type="hidden" name="key" value="<%= twiml.key %>" />
       <script>key = '<%= twiml.key %>';</script>

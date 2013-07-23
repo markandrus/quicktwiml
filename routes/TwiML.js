@@ -24,49 +24,38 @@ function update(req, res, next, found) {
 
 // Response Codes:
 
-//   * 303
-//   * 400
-//   * 500
-
-app.post('/TwiML', function(req, res) {
-  if (validate(req.body.content))
-    return update(req, res, function(res, twiml) {
-      res.redirect(303, '/TwiML/' + twiml.key);
-    });
-  res.send(400);
-  res.end();
-});
-
-// PUT
-// ---
-
-// Clients can update existing TwiML, but attempts to create new TwiML via PUT
-// receive a 403 response. Successful PUT-s receive a 200 response.
-
-// Response Codes:
-
 //   * 200
+//   * 303
 //   * 400
 //   * 403
 //   * 500
 
-app.put('/TwiML/:key', function(req, res) {
+app.post('/TwiML/:key?', function(req, res) {
   if (validate(req.body.content))
-    return TwiML.findOne({ where: { key: req.params.key } },
-      function(err, twiml) {
-        if (err) {
-          console.error(err);
-          res.send(500);
-        } else if (!twiml)
-          res.send(403);
-        else
-          return update(req, res, function(res) { 
-            res.send(200);
-            res.end();
-          }, twiml);
-        res.end();
-      }
-    );
+    if (req.params.key)
+      return TwiML.findOne({ where: { key: req.params.key } },
+        function(err, twiml) {
+          if (err) {
+            console.error(err);
+            res.send(500);
+          /* Server determines TwiML key, not client. */
+          } else if (!twiml)
+            res.send(403);
+          else
+            /* Update existing TwiML. */
+            return update(req, res, function(res) {
+              res.send(200);
+              res.end();
+            }, twiml);
+          res.end();
+        }
+      );
+    else
+      /* Create new TwiML. */
+      return update(req, res, function(res, twiml) {
+        res.redirect(303, '/TwiML/' + twiml.key);
+      });
+  /* Invalid TwiML. */
   res.send(400);
   res.end();
 });
@@ -80,7 +69,7 @@ app.put('/TwiML/:key', function(req, res) {
 //   * 404
 //   * 500
 
-app.del('/TwiML/:key', function(req, res) {
+/*app.del('/TwiML/:key', function(req, res) {
   TwiML.findOne({ where: { key: req.params.key } }, function(err, twiml) {
     if (err) {
       console.error(err);
@@ -97,7 +86,7 @@ app.del('/TwiML/:key', function(req, res) {
         res.end();
       });
   });
-});
+});*/
 
 // GET
 // ---
