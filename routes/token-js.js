@@ -15,7 +15,7 @@ capability.allowClientOutgoing(process.env.TWILIO_APP_SID);
 
 app.get('/token.js', function(req, res) {
   res.set('Content-Type', 'application/javascript');
-  if (process.env.APP_ENABLE_CALLS)
+  if (process.env.APP_ENABLE_CALLS === 'true')
     res.send(201, "var token='" + capability.generate() + "';");
   else
     res.send(200, 'var token=false;');
