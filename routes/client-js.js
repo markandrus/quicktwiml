@@ -24,9 +24,9 @@ app.get('/client.js', function(req, res) {
     } else {
       res.set('Content-Type', 'application/javascript');
       res.send(200,
-        '(function(token) {\n\n' +
-        file +
-        '\n})(\'' + capability.generate() + '\');'
+//        '(function(token) {\n\n' +
+        file // +
+//        '\n})(\'' + capability.generate() + '\');'
       );
     }
     res.end();
