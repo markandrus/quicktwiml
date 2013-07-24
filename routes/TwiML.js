@@ -31,7 +31,9 @@ function update(req, res, next, found) {
 //   * 500
 
 app.post('/TwiML/:key?', function(req, res) {
-  if (validate(req.body.content))
+  if (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
+    
+  } else if (validate(req.body.content))
     if (req.params.key)
       return TwiML.findOne({ where: { key: req.params.key } },
         function(err, twiml) {
@@ -41,7 +43,12 @@ app.post('/TwiML/:key?', function(req, res) {
           /* Server determines TwiML key, not client. */
           } else if (!twiml)
             res.send(403);
-          else
+          /* Serve TwiML for Twilio. */
+          else if
+              (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
+            res.set('Content-Type', 'application/xml');
+            res.send(200, twiml.content);
+          } else
             /* Update existing TwiML. */
             return update(req, res, function(res) {
               res.set('Content-Type', 'text/html');
