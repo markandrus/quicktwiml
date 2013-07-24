@@ -31,6 +31,8 @@ function update(req, res, next, found) {
 //   * 500
 
 app.post('/TwiML/:key?', function(req, res) {
+  /* Twilio can be configured to POST to TwiML URLs, so we check for Twilio's
+     request and serve them "application/xml". */
   var isTwilio =
     twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN);
   if (validate(req.body.content) || isTwilio)
@@ -48,18 +50,21 @@ app.post('/TwiML/:key?', function(req, res) {
             res.set('Content-Type', 'application/xml');
             res.send(200, twiml.content);
           } else
+            /* Currently, disallow updating existing TwiML. */
+            res.send(401);
             /* Update existing TwiML. */
-            return update(req, res, function(res) {
+            /* return update(req, res, function(res) {
               res.set('Content-Type', 'text/html');
               res.render('TwiML', {
                 twiml: twiml,
                 embed: req.query.embed ? true : false
               });
             }, twiml);
+            */
           res.end();
         }
       );
-    else
+    else if (!isTwilio)
       /* Create new TwiML. */
       return update(req, res, function(res, twiml) {
         res.redirect(303, '/TwiML/' + twiml.key);
@@ -136,7 +141,7 @@ app.get('/TwiML/:key?', function(req, res) {
   var skip = parseInt(req.query.skip) || 0;
   TwiML.all({ order: 'title', limit: 10, skip: skip * 10 }, function(err, twimls) {
     if (!err)
-      return res.render('TwiML-index', {
+      return res.render('TwiML', {
         twimls: twimls,
         twiml: {},
         embed: false
