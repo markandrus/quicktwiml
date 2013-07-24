@@ -18,22 +18,20 @@ h2 {
   font-weight: lighter;
   opacity: 0.7;
 }
-#main {
+body {
+  max-width: 960px;
+  margin: 0 auto;
 }
 </style>
 </head>
 <body>
 
-<a href="//github.com/markandrus/quicktwiml"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
-<!--<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>-->
-
-<!--<a href="/TwiML" class="btn btn-large btn-danger">Create a New TwiML script</a>-->
+<a href="//github.com/markandrus/quicktwiml"><img style="position: absolute; top: 0; right: 0; border: 0;" src="//s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
 <div class="container-fluid" style="margin-top: 54px; text-align: center;">
   <div class="row-fluid">
-    <div class="span12" style="float: none; margin: 0 auto;">
+    <div class="span9" style="float: none; margin: 0 auto;">
       <h1>quicktwiml</h1>
-      <!--<h1>quicktwiml <a href="http://www.twilio.com/" style="text: decoration: none; display: inline-block; width: 166px; height: 0; overflow: hidden; padding-top: 31px; background: url(http://www.twilio.com/packages/company/img/logos_icon_poweredbysmall.png) no-repeat; position: relative; top: 1px;">powered by twilio™</a></h1>-->
       <p class="lead">Quickly save, share, and call <a href="//www.twilio.com/docs/api/twiml">TwiML</a> scripts from your browser.</p>
     </div>
   </div>
@@ -41,28 +39,80 @@ h2 {
 
 <div id="main" class="container-fluid" style="">
   <div class="row-fluid">
-    <div class="span6" style="float: none; margin: 0 auto;">
-      <h2>Get Started</h2>
-      <p>Write your own TwiML or <a href="#">check out some examples</a>.</p>
-<center>      <a href="/TwiML" class="btn btn-large btn-primary">Create a New TwiML Script</a></center>
-      <h2>Try it out</h2>
-      <p>Click the &#8220;Call&#8221; button below to start calling the TwiML script from your browser.</p>
-      <iframe src="/TwiML/QrRVZZ82FlM?embed=true" width="100%" height="345px"></iframe>
-    </div>
-  </div>
-</div>
-
-<div class="container-fluid" style="position: relative;">
-  <div class="row-fluid">
-    <div class="span12" style="float: none; margin: 0 auto; text-align: center;">
+    <div class="span9" style="float: none; margin: 0 auto;">
+      <br>
+      <br>
+      <div style="text-align: center">
+        <a href="/TwiML" class="btn btn-large btn-primary">Create a New TwiML Script</a>
+      </div>
+      <br>
+      <br>
+      <h2>&lt;Say&gt; Example</h2>
+      <p class="lead">Text-to-speech.</a>
+      <p>Click the &#8220;Call&#8221; button below to start calling the TwiML script from your browser. <a href="//www.twilio.com/docs/api/twiml/say">Read more about &lt;Say&gt;.</a></p>
+      <br>
+      <iframe src="//quicktwiml.herokuapp.com/TwiML/dfLPcQh1dBo" width="100%" height="345px"></iframe>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-<div class="row-fluid">
+  <div class="row-fluid">
+    <div class="span9" style="float: none; margin: 0 auto;">
+      <br>
+      <br>
+      <h2>&lt;Dial&gt; Example</h2>
+      <p class="lead">Dial phone numbers from your TwiML script.</p>
+      <p>This example calls the <a href="//www.nist.gov/pml/div688/grp40/ttds.cfm">NIST Telephone Time-of-Day service</a> in Colorado. <a href="//www.twilio.com/docs/api/twiml/dial">Read more about &lt;Dial&gt;.</a></p>
+      <br>
+      <iframe src="//quicktwiml.herokuapp.com/TwiML/dJSybkfOF4k?embed=true" width="100%" height="345px"></iframe>
+    </div>
+  </div>
+</div>
 
-<div class="span12" style="float: none; margin: 0 auto;">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span9" style="float: none; margin: 0 auto;">
+      <br>
+      <br>
+      <h2>&lt;Redirect&gt; Example</h2>
+      <p class="lead">Transfer control from one TwiML script to another.</p>
+      <p>In the example below, <a href="//quicktwiml.herokuapp.com/TwiML/ThL8C8Uv77Q?embed=true">xBd6dhdXmZs</a> is the relative address of Script 2. <a href="//www.twilio.com/docs/api/twiml/redirect">Read more about &lt;Redirect&gt;.</a></p>
+      <br>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12" style="float: none; margin: 0 auto;">
+      <div class="row-fluid">
+        <div class="span6">
+          <iframe src="//quicktwiml.herokuapp.com/TwiML/ThL8C8Uv77Q?embed=true" width="100%" height="345px"></iframe>
+        </div>
+        <div class="span6">
+          <iframe src="//quicktwiml.herokuapp.com/TwiML/xBd6dhdXmZs?embed=true" width="100%" height="345px"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span9" style="float: none; margin: 0 auto;">
+      <br>
+      <br>
+      <h2>Embed Example</h2>
+      <p>TwiML scripts can be embedded in your site using an iframe. Just set <code>src</code> to the URL for your TwiML and append the <code>?embed=true</code>. For example,</p>
+      <pre>
+&lt;iframe
+  src="//quicktwiml.herokuapp.com/TwiML/N8ISto_t7oY?embed=true"
+  width="100%"
+  height="345px"
+&gt;&lt;/iframe&gt;</pre>
+      <p>results in the following:</p>
+      <iframe src="/TwiML/3ZeAnMf9-g8?embed=true" width="100%" height="345px"></iframe>
+    </div>
+  </div>
+</div>
 
 <!--
 <h2>Examples</h2>
@@ -79,30 +129,8 @@ h2 {
 
 <h3>Redirect</h3>
 
-<div class="row-fluid">
-  <div class="span6">
-    <iframe src="/TwiML/W81uCb5yTMs?embed=true" width="100%" height="345px"></iframe>
-  </div>
-  <div class="span6">
-    <iframe src="/TwiML/hqkq_2KBFPY?embed=true&call=false" width="100%" height="345px"></iframe>
-  </div>
-</div>
 
-<h2>Embed</h2>
-<p>TwiML scripts can be embedded in your site using an iframe. Just set <code>src</code> to the URL for your TwiML and append the <code>?embed=true</code>. For example,
-<pre>
-&lt;iframe
-  src="https://quicktwiml.herokuapp.com/TwiML/N8ISto_t7oY?embed=true"
-  width="100%"
-  height="345px"
-&gt;&lt;/iframe&gt;
-</pre>
-<p>results in the following.</p>
-<iframe src="/TwiML/3ZeAnMf9-g8?embed=true" width="100%" height="345px"></iframe>
 <p>The embed method is pretty dumb for now (for example, it doesn't auto-adjust for height). If you'd like to help out, check out the project on <a href="#">GitHub</a>.</p>
 -->
-</div>
-</div>
-</div>
 </body>
 </html>
