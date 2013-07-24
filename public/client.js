@@ -40,17 +40,21 @@ function validateTwiML(twiml) {
     else if (xmlhttp.status === 200) {
       saveBtn.disabled = false;
       removeClass(saveBtn, 'disabled');
-      // callBtn.disabled = false;
-      // removeClass(callBtn, 'disabled');
       // FIXME: ...
-      callBtn.disabled = true;
-      addClass(callBtn, 'disabled');
+      if (token) {
+        // callBtn.disabled = false;
+        // removeClass(callBtn, 'disabled');
+        callBtn.disabled = true;
+        addClass(callBtn, 'disabled');
+      }
       echo = twiml;
     } else {
       saveBtn.disabled = true;
       addClass(saveBtn, 'disabled');
-      callBtn.disabled = true;
-      addClass(callBtn, 'disabled');
+      if (token) {
+        callBtn.disabled = true;
+        addClass(callBtn, 'disabled');
+      }
       echo = undefined;
     }
   };
@@ -75,40 +79,44 @@ title.onchange = function() {
 // NOTE: There will either be global variable `key` or `echo` accessible to
 // the following functions.
 
-var callBtn = document.getElementById('call');
+if (token) {
 
-Twilio.Device.setup(token);
+  var callBtn = document.getElementById('call');
 
-function call(key, val) {
-  return function() {
-    removeClass(callBtn, 'btn-success');
-    addClass(callBtn, 'btn-danger');
-    callBtn.value = callBtn.value.replace(/Call$/, "Hangup");
-    callBtn.onclick = Twilio.Device.disconnectAll;
-    var param = {}; param[key] = encodeURIComponent(val());
-    Twilio.Device.connect(param);
-  };
+  Twilio.Device.setup(token);
+
+  function call(key, val) {
+    return function() {
+      removeClass(callBtn, 'btn-success');
+      addClass(callBtn, 'btn-danger');
+      callBtn.value = callBtn.value.replace(/Call$/, "Hangup");
+      callBtn.onclick = Twilio.Device.disconnectAll;
+      var param = {}; param[key] = encodeURIComponent(val());
+      Twilio.Device.connect(param);
+    };
+  }
+
+  var echo;
+
+  function ready() {
+    if (!key)
+      return callBtn.onclick = call('twiml', function() { return echo; });
+    callBtn.onclick = call('key', function() { return key; });
+    callBtn.disabled = false;
+    removeClass(callBtn, 'disabled');
+  }
+
+  Twilio.Device.ready(ready);
+
+  function disconnect() {
+    removeClass(callBtn, 'btn-danger');
+    addClass(callBtn, 'btn-success');
+    callBtn.value = callBtn.value.replace(/Hangup$/, "Call");
+    ready();
+  }
+
+  Twilio.Device.disconnect(disconnect);
+
+  Twilio.Device.error(disconnect);
+
 }
-
-var echo;
-
-function ready() {
-  if (!key)
-    return callBtn.onclick = call('twiml', function() { return echo; });
-  callBtn.onclick = call('key', function() { return key; });
-  callBtn.disabled = false;
-  removeClass(callBtn, 'disabled');
-}
-
-Twilio.Device.ready(ready);
-
-function disconnect() {
-  removeClass(callBtn, 'btn-danger');
-  addClass(callBtn, 'btn-success');
-  callBtn.value = callBtn.value.replace(/Hangup$/, "Call");
-  ready();
-}
-
-Twilio.Device.disconnect(disconnect);
-
-Twilio.Device.error(disconnect);

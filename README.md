@@ -67,6 +67,10 @@ heroku config:set APP_DB_NAME=$APP_DB_NAME
 heroku config:set APP_DB_USER=$APP_DB_USER
 heroku config:set APP_DB_PORT=$APP_DB_PORT
 heroku config:set APP_DB_PASS=$APP_DB_PASS
+
+# Optionally set these application-specific variables.
+heroku config:set APP_FORCE_HTTPS=true
+heroku config:set APP_ENABLE_CALLS=true
 ```
 
 Finally, push this code (or your own fork) to your Heroku app! Questions? Open

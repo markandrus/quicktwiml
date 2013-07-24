@@ -4,7 +4,7 @@ var express = require('express'),
 
 app.enable('trust proxy');
 
-if (process.env.APP_AUTH_USER)
+if (process.env.APP_FORCE_HTTPS)
   app.use(function(req, res, next) {
     if (!req.secure)
       return res.redirect('https://' + req.get('Host') + req.url);
