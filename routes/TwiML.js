@@ -31,9 +31,9 @@ function update(req, res, next, found) {
 //   * 500
 
 app.post('/TwiML/:key?', function(req, res) {
-  if (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
-    
-  } else if (validate(req.body.content))
+  var isTwilio =
+    twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN);
+  if (validate(req.body.content) || isTwilio)
     if (req.params.key)
       return TwiML.findOne({ where: { key: req.params.key } },
         function(err, twiml) {
@@ -44,8 +44,7 @@ app.post('/TwiML/:key?', function(req, res) {
           } else if (!twiml)
             res.send(403);
           /* Serve TwiML for Twilio. */
-          else if
-              (twilio.validateExpressRequest(req, process.env.TWILIO_AUTH_TOKEN)) {
+          else if (isTwilio) {
             res.set('Content-Type', 'application/xml');
             res.send(200, twiml.content);
           } else
