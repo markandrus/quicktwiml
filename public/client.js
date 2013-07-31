@@ -1,3 +1,5 @@
+token = true;
+
 function removeClass(elm, str) {
   return elm.className = elm.className.split(' ').filter(function(s) {
     return s !== str;
@@ -42,12 +44,14 @@ function validateTwiML(twiml) {
       removeClass(saveBtn, 'disabled');
       // FIXME: ...
       if (token) {
-        // callBtn.disabled = false;
-        // removeClass(callBtn, 'disabled');
-        callBtn.disabled = true;
-        addClass(callBtn, 'disabled');
+        callBtn.disabled = false;
+        removeClass(callBtn, 'disabled');
+        ready();
+        // callBtn.disabled = true;
+        // addClass(callBtn, 'disabled');
       }
       echo = twiml;
+      console.log(echo);
     } else {
       saveBtn.disabled = true;
       addClass(saveBtn, 'disabled');
