@@ -108,6 +108,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="man"></xs:enumeration>
 			<xs:enumeration value="woman"></xs:enumeration>
+			<xs:enumeration value="alice"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -132,6 +133,32 @@
 			<xs:enumeration value="es"></xs:enumeration>
 			<xs:enumeration value="fr"></xs:enumeration>
 			<xs:enumeration value="de"></xs:enumeration>
+			<xs:enumeration value="da-DK"></xs:enumeration>
+			<xs:enumeration value="de-DE"></xs:enumeration>
+			<xs:enumeration value="en-AU"></xs:enumeration>
+			<xs:enumeration value="en-CA"></xs:enumeration>
+			<xs:enumeration value="en-GB"></xs:enumeration>
+			<xs:enumeration value="en-IN"></xs:enumeration>
+			<xs:enumeration value="en-US"></xs:enumeration>
+			<xs:enumeration value="ca-ES"></xs:enumeration>
+			<xs:enumeration value="es-ES"></xs:enumeration>
+			<xs:enumeration value="es-MX"></xs:enumeration>
+			<xs:enumeration value="fi-FI"></xs:enumeration>
+			<xs:enumeration value="fr-CA"></xs:enumeration>
+			<xs:enumeration value="fr-FR"></xs:enumeration>
+			<xs:enumeration value="it-IT"></xs:enumeration>
+			<xs:enumeration value="ja-JP"></xs:enumeration>
+			<xs:enumeration value="ko-KR"></xs:enumeration>
+			<xs:enumeration value="nb-NO"></xs:enumeration>
+			<xs:enumeration value="nl-NL"></xs:enumeration>
+			<xs:enumeration value="pl-PL"></xs:enumeration>
+			<xs:enumeration value="pt-BR"></xs:enumeration>
+			<xs:enumeration value="pt-PT"></xs:enumeration>
+			<xs:enumeration value="ru-RU"></xs:enumeration>
+			<xs:enumeration value="sv-SE"></xs:enumeration>
+			<xs:enumeration value="zh-CN"></xs:enumeration>
+			<xs:enumeration value="zh-HK"></xs:enumeration>
+			<xs:enumeration value="zh-TW"></xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 
