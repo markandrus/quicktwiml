@@ -1,0 +1,34 @@
+// Provides a dummy `window.QuickTwiML` until the real embed script is loaded.
+(function load(key) {
+
+var script, keys = [];
+
+// Enqueue keys to be embedded once the real embed script is loaded.
+function enqueue(key) {
+  keys.push(key);
+}
+
+// When `dequeue` is called, `window.QuickTwiML` will have been overwritten by
+// the real embed script.
+function dequeue() {
+  keys.forEach(function(key) {
+    window.QuickTwiML.embed(key);
+  });
+}
+
+if (window.QuickTwiML)
+  return window.QuickTwiML.embed(key);
+
+enqueue(key);
+window.QuickTwiML = { embed: enqueue };
+
+script = document.createElement('script');
+script.setAttribute('src', 'http://127.0.0.1:3000/embed/embed.js');
+script.onreadystatechange = function() {
+  if (this.readyState === 'complete')
+    dequeue();
+}
+script.onload = dequeue;
+document.getElementsByTagName('head')[0].appendChild(script);
+
+})('<%= key %>');
