@@ -15,6 +15,7 @@ app.use(express.bodyParser());
 
 app.set('view engine', 'ejs');
 
+require('./routes/index-html.js')(app);
 require('./routes/js/load-js.js')(app);
 require('./routes/js/embed-js.js')(app);
 require('./routes/json/token-json.js')(app);

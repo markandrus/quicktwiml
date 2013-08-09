@@ -64,7 +64,7 @@ function embed(key) {
   // TODO: Make this more configurable.
   function srcDoesNotMatchKey(src, key) {
     var match =
-      src.match(/\/\/<%= appDomainRegex %>\/embed\/load\.js\?key=(.*)/)
+      src.match(/\/\/<%= appDomainRegex %>\/js\/load\.js\?key=(.*)/)
     return !match || match[1] !== key;
   }
 
