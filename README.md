@@ -71,6 +71,7 @@ heroku config:set APP_DB_PASS=$APP_DB_PASS
 # Optionally set these application-specific variables.
 heroku config:set APP_FORCE_HTTPS=true
 heroku config:set APP_ENABLE_CALLS=true
+heroku config:set APP_DOMAIN=quicktwiml.herokuapp.com
 ```
 
 Finally, push this code (or your own fork) to your Heroku app! Questions? Open
