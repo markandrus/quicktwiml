@@ -15,8 +15,9 @@ app.use(express.bodyParser());
 
 app.set('view engine', 'ejs');
 
+require('./routes/js/load-js.js')(app);
+require('./routes/js/embed-js.js')(app);
 require('./routes/json/token-json.js')(app);
-require('./routes/embed/load-js.js')(app);
 require('./routes/validate.js')(app);
 require('./routes/TwiML.js')(app, models.TwiML);
 require('./routes/Twilio.js')(app);

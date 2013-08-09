@@ -7,7 +7,7 @@ function embed(key) {
   // Server Messaging
   // ----------------
 
-  // See `embed/server.js`.
+  // See `js/server.js`.
 
   // Client Messaging
   // ----------------
@@ -58,13 +58,13 @@ function embed(key) {
 
   // TODO: Make this more configurable.
   function getTwiMLURL(key) {
-    return 'http://127.0.0.1:3000/TwiML/' + key + '?embed=true';
+    return '//<%= appDomain %>/TwiML/' + key + '?embed=true';
   }
 
   // TODO: Make this more configurable.
   function srcDoesNotMatchKey(src, key) {
     var match =
-      src.match(/http:\/\/127\.0\.0\.1:3000\/embed\/load\.js\?key=(.*)/)
+      src.match(/\/\/<%= appDomainRegex %>\/embed\/load\.js\?key=(.*)/)
     return !match || match[1] !== key;
   }
 

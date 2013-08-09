@@ -23,7 +23,7 @@ enqueue(key);
 window.QuickTwiML = { embed: enqueue };
 
 script = document.createElement('script');
-script.setAttribute('src', 'http://127.0.0.1:3000/embed/embed.js');
+script.setAttribute('src', '//<%= appDomain %>/js/embed.js');
 script.onreadystatechange = function() {
   if (this.readyState === 'complete')
     dequeue();
