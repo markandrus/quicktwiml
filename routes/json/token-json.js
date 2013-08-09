@@ -10,15 +10,15 @@ capability.allowClientOutgoing(process.env.TWILIO_APP_SID);
 
 // Response Codes
 
+//   * 200
 //   * 201
-//   * 401
 
-app.get('/token.js', function(req, res) {
+app.get('/json/token.json', function(req, res) {
   res.set('Content-Type', 'application/javascript');
   if (process.env.APP_ENABLE_CALLS === 'true')
-    res.send(201, "var token='" + capability.generate() + "';");
+    res.send(201, '{"token":"' + capability.generate() + '"}');
   else
-    res.send(200, 'var token=false;');
+    res.send(200, '{}');
   res.end();
 });
 

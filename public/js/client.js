@@ -13,7 +13,17 @@ function addClass(elm, str) {
 
 var editor = ace.edit('content-ace'),
     session = editor.getSession(),
-    textarea = document.getElementById('content-textarea');
+    textarea = document.getElementById('content-textarea'),
+    elem = document.getElementById('content-ace');
+
+function resizeEditor() {
+  elem.setAttribute('style', 'width: 100%; height: ' +
+    ((session.getLength() + 1) * 16) + 'px;');
+  editor.resize();
+  var form = document.getElementById('twiml-form').parentElement;
+  window.parent.postMessage('size:' + form.scrollWidth +
+                                ',' + form.scrollHeight, '*');
+}
 
 session.setValue(textarea.textContent);
 textarea.style['display'] = 'none';
@@ -21,7 +31,11 @@ session.setMode('ace/mode/xml');
 session.on('change', function() {
   var text = (textarea.textContent = session.getValue());
   validateTwiML(text);
+  resizeEditor();
 });
+
+elem.setAttribute('style', 'width: 100%; height: ' +
+  ((session.getLength() + 1) * 16) + 'px;');
 
 // Handle asynchronous calls to TwiML validation service
 // -----------------------------------------------------

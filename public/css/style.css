@@ -1,11 +1,9 @@
 #twiml-form {
   float: none;
   margin: 0 auto;
-
      -moz-box-shadow: 0px 5px 10px #ccc;
   -webkit-box-shadow: 0px 5px 10px #ccc;
           box-shadow: 0px 5px 10px #ccc;
-
 }
 
 #title-container {
@@ -13,26 +11,11 @@
   height: 40px;
 }
 
-/*
-#title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: auto;
-}
-*/
-
 #content-textarea {
   width: 100%;
   height: 20em;
   margin-bottom: 10px;
 }
-
-/*#content-ace {
-  width: 100%;
-  height: 20em;
-  margin-bottom: 10px;
-}*/
 
 legend > input {
   height: 40px !important;
@@ -42,4 +25,41 @@ legend > input {
   box-shadow: none !important;
   border: 0 !important;
   width: 100% !important;
+}
+
+#github-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+
+.span9, .span12 {
+  float: none !important;
+  margin: 0 auto !important;
+}
+
+#header {
+  margin-top: 54px;
+  text-align: center;
+}
+
+#create-wrapper {
+  margin-top: 3em;
+}
+
+h2 {
+  margin-top: 1.5em;
+  font-weight: lighter;
+  opacity: 0.7;
+}
+
+iframe {
+  margin-top: 1em;
+  border: 0;
+}
+
+body {
+  max-width: 960px !important;
+  margin: 0 auto 70px auto;
 }

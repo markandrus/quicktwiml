@@ -1,5 +1,7 @@
 (function() {
 
+var iframes = [];
+
 function embed(key) {
 
   // Server Messaging
@@ -10,6 +12,7 @@ function embed(key) {
   // Client Messaging
   // ----------------
 
+  // FIXME: `iframe` parameter likely unnecessary.
   function setupClientMessaging(iframe) {
 
     var a = document.createElement('a');
@@ -41,9 +44,9 @@ function embed(key) {
     // Response Handlers
     // -----------------
 
-    function handleSizeResponse(width, height) {
-      iframe.setAttribute('width', '100%'); // width + 'px');
-      iframe.setAttribute('height', height + 'px');
+    function handleSizeResponse(id, width, height) {
+      iframes[parseInt(id)-1].setAttribute('width', '100%'); // width + 'px');
+      iframes[parseInt(id)-1].setAttribute('height', height + 'px');
     }
 
     window.addEventListener('message', handleResponse, false);
@@ -77,12 +80,13 @@ function embed(key) {
       return false;
     // Create <iframe>.
     iframe = document.createElement('iframe');
+    iframes.push(iframe);
     iframe.setAttribute('src', getTwiMLURL(key));
     iframe.setAttribute('width', '100%');
     iframe.setAttribute('scrolling', 'no');
-    iframe.setAttribute('style', 'border: 0');
+    iframe.style.border = '1px solid #ccc';
     iframe.setAttribute('onload',
-      "this.contentWindow.postMessage('size?', this.src)");
+      "this.contentWindow.postMessage('assign:" + iframes.length + "', this.src)");
     // TODO: Delay setting up messaging?
     setupClientMessaging(iframe);
     // Replace <script> with <iframe>.

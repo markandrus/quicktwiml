@@ -3,17 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>quicktwiml<% if (twiml.title) { %>: <%= twiml.title %><% } %></title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Quickly save, share, and call TwiML scripts from your browser.">
+    <meta name="author" content="Mark Andrus Roberts">
     <script src="//static.twilio.com/libs/twiliojs/1.1/twilio.min.js"></script>
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/style.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/vendor/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <% if (embed) { %>
-      <style type="text/css">
-        body { padding: 0; !important; }
-        form { width: 100% !important; box-sizing: border-box; padding: 0 !important; margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
-      </style>
+    <link href="/css/embed.css" rel="stylesheet">
     <% } %>
   </head>
   <body>

@@ -15,8 +15,7 @@ app.use(express.bodyParser());
 
 app.set('view engine', 'ejs');
 
-require('./routes/token-js.js')(app, express.basicAuth);
-require('./routes/client-js.js')(app);
+require('./routes/json/token-json.js')(app);
 require('./routes/embed/load-js.js')(app);
 require('./routes/validate.js')(app);
 require('./routes/TwiML.js')(app, models.TwiML);
